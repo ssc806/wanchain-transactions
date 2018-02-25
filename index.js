@@ -1,24 +1,16 @@
 /*
 Showing the difference between getting the from address in a WAN transaction vs a Non-WAN transaction...
-Second transaction is identical except for the value.. so it should have the same from address... right? ;)
 
 TX Sent 1:
-{"Txtype":"0x01","nonce":"0x00","gasPrice":"0x2a600b9c00","gas":"0x5208","to":"0x514CC192b9d55493009b985C8177b2d2d8a7F98D","from":"0xa843db05ec3c0f152734d510d46a188847c636a3","value":"0x016345785d8a0000","data":"","v":"0x1c","r":"0x8afd0beb42b846357931cf62ef197f3945a6e04dc33eea49f43ebd21e156c4b1","s":"0x6cdfbe6c25c37b6224e5c9fbaac4afd1e68a15fa87a5299e93a3ab6d35b65a61"}
+{"Txtype":"0x01","nonce":"0x01","gasPrice":"0x2a600b9c00","gas":"0x5208","to":"0x2c8c1d4E69A521900b4Cb77769171cD29054c98f","value":"0x016345785d8a0000","data":"","chainId":1,"v":"0x25","r":"0xbd249bcc212fb7b0fbd00ac25436f03d12813b8613ee74a5dc2de4ba78dc5c8f","s":"0x2c4dedc068a31b3d837f48e47553758531033e74bcd21a40fc766529f756606f"}
 
 Raw TX 1:
-0xf86d0180852a600b9c0082520894514cc192b9d55493009b985c8177b2d2d8a7f98d88016345785d8a0000801ca08afd0beb42b846357931cf62ef197f3945a6e04dc33eea49f43ebd21e156c4b1a06cdfbe6c25c37b6224e5c9fbaac4afd1e68a15fa87a5299e93a3ab6d35b65a61
+0xf86d0101852a600b9c00825208942c8c1d4e69a521900b4cb77769171cd29054c98f88016345785d8a00008025a0bd249bcc212fb7b0fbd00ac25436f03d12813b8613ee74a5dc2de4ba78dc5c8fa02c4dedc068a31b3d837f48e47553758531033e74bcd21a40fc766529f756606f
 
-TX Sent 2:
-{"Txtype":"0x01","nonce":"0x00","gasPrice":"0x2a600b9c00","gas":"0x5208","to":"0x514CC192b9d55493009b985C8177b2d2d8a7F98D","from":"0xa843db05ec3c0f152734d510d46a188847c636a3","value":"0x02c68af0bb140000","data":"","v":"0x1c","r":"0x14459717802bbcd38aa59b910ebd5d1a3cd62c00f4b1bf9de66a30ca61670de8","s":"0x48fe34ed7cf4e32ceabc1401c806232207c5d92db6c6a43c0a429e48b8e317bc"}
-
-Raw TX 2:
-0xf86d0180852a600b9c0082520894514cc192b9d55493009b985c8177b2d2d8a7f98d8802c68af0bb140000801ca014459717802bbcd38aa59b910ebd5d1a3cd62c00f4b1bf9de66a30ca61670de8a048fe34ed7cf4e32ceabc1401c806232207c5d92db6c6a43c0a429e48b8e317bc
 */
 
 // Decode TX 1
-decode("0xf86d0180852a600b9c0082520894514cc192b9d55493009b985c8177b2d2d8a7f98d88016345785d8a0000801ca08afd0beb42b846357931cf62ef197f3945a6e04dc33eea49f43ebd21e156c4b1a06cdfbe6c25c37b6224e5c9fbaac4afd1e68a15fa87a5299e93a3ab6d35b65a61", "TX1");
-// Decode TX 2
-decode("0xf86d0180852a600b9c0082520894514cc192b9d55493009b985c8177b2d2d8a7f98d8802c68af0bb140000801ca014459717802bbcd38aa59b910ebd5d1a3cd62c00f4b1bf9de66a30ca61670de8a048fe34ed7cf4e32ceabc1401c806232207c5d92db6c6a43c0a429e48b8e317bc", "TX2");
+decode("0xf86d0180852a600b9c0082520894f386c66627e80117cbd20d76bd2489da78aa743088016345785d8a00008025a0c11942490fb144f38a0bdcbe935f0cf3fc561b9373b04016c6f44f1dfdf4e089a00a9dbef562709306776622e632648ca269f0d38cf15b0b02a95cd0ab916b3fb0", "TX1");
 
 function decode(signedTx, desc) {
     // Normal Ether transaction
@@ -30,6 +22,7 @@ function decode(signedTx, desc) {
     
     // Decode the TX to get all the fields as an array of Buffers
     decodedtx=ethUtil.rlp.decode(signedTx);
+console.log(decodedtx)
     // Shift to remove the first field (Txtype, since ether doesn't know that
     var txtype = decodedtx.shift();
     //console.log("txtype: " + txtype.toString('hex'));
