@@ -5,7 +5,7 @@
   "author": "MyEtherWallet",
   "license": "ISC",
   "dependencies": {
-    "wanchain-util": "^1.0.7",
+    "wanchain-util": "git+https://github.com/wanchain/wanchain-util.git",
     "web3": "^0.20.2"
   },
   "devDependencies": {
